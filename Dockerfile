@@ -78,13 +78,14 @@ RUN \
     sed -i 's/<application type="normal">/<application type="normal" title="JDownloader 2">/' \
         /etc/xdg/openbox/rc.xml
 
+# Add files.
+COPY rootfs/ /
+
 # Generate and install favicons.
 RUN \
     APP_ICON_URL=https://raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/images/jdownloader-2-icon.png && \
-    install_app_icon.sh "$APP_ICON_URL"
-
-# Add files.
-COPY rootfs/ /
+    chmod +x /usr/local/bin/install_app_icon.sh
+    install_app_icon.sh $APP_ICON_URL"
 
 # Set environment variables.
 ENV APP_NAME="JDownloader 2" \
