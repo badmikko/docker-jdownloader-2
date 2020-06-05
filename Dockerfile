@@ -37,8 +37,8 @@ RUN \
     *) echo "unsupported architecture"; exit 1 ;; \
   esac && \
   echo “Running on ${ARCH}” && \
-  export JDOWNLOADER_URL=http://installer.jdownloader.org/JDownloader.jar && \
-  export JAVAJRE_URL=https://d3pxv6yz143wms.cloudfront.net/${JAVAJRE_VERSION}/amazon-corretto-${JAVAJRE_VERSION}-linux-${ARCH}.tar.gz
+  export JDOWNLOADER_URL="http://installer.jdownloader.org/JDownloader.jar" && \
+  export JAVAJRE_URL="https://d3pxv6yz143wms.cloudfront.net/${JAVAJRE_VERSION}/amazon-corretto-${JAVAJRE_VERSION}-linux-${ARCH}.tar.gz"
 
 # Define working directory.
 WORKDIR /tmp
