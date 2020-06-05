@@ -46,13 +46,13 @@ WORKDIR /tmp
 
 # Install dependencies.
 RUN \
-    add-pkg \
+    apt-get install -y \
         # For the 7-Zip-JBinding workaround, Oracle JRE is needed instead of
         # the Alpine Linux's openjdk native package.
         # The libstdc++ package is also needed as part of the 7-Zip-JBinding
         # workaround.
         #openjdk8-jre \
-        libstdc++ \
+        libstdc++-10-dev \
         ttf-dejavu \
         # For ffmpeg and ffprobe tools.
         ffmpeg \
@@ -68,10 +68,10 @@ RUN \
 # Download and install Oracle JRE.
 # NOTE: This is needed only for the 7-Zip-JBinding workaround.
 RUN \
-    add-pkg --virtual build-dependencies curl && \
+    apt-get install -y --no-install-recommends build-essential curl && \
     mkdir /opt/jre && \
     curl -# -L ${JAVAJRE_URL} | tar -xz --strip 2 -C /opt/jre amazon-corretto-${JAVAJRE_VERSION}-linux-${ARCH}/jre && \
-    del-pkg build-dependencies
+    apt-get remove -y build-essential
 
 # Maximize only the main/initial window.
 RUN \
