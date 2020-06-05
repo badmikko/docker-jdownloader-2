@@ -27,25 +27,22 @@ ARG DOCKER_IMAGE_VERSION=unknown
 # Define software versions.
 ARG JAVAJRE_VERSION=8.212.04.2
 
+# Determinate CPU Arch.
+RUN \
+  dpkgArch="$(uname -m)" && \
+  case "${dpkgArch##*-}" in \
+    x86_64) ARCH='x64';; \
+    aarch64) ARCH='aarch64';; \
+    *) echo "unsupported architecture"; exit 1 ;; \
+  esac && \
+  echo “Running on ${ARCH}” && \
+
 # Define software download URLs.
 ARG JDOWNLOADER_URL=http://installer.jdownloader.org/JDownloader.jar
-ARG JAVAJRE_URL=https://d3pxv6yz143wms.cloudfront.net/${JAVAJRE_VERSION}/amazon-corretto-${JAVAJRE_VERSION}-linux-x64.tar.gz
+ARG JAVAJRE_URL=https://d3pxv6yz143wms.cloudfront.net/${JAVAJRE_VERSION}/amazon-corretto-${JAVAJRE_VERSION}-linux-${ARCH}.tar.gz
 
 # Define working directory.
 WORKDIR /tmp
-
-# Download JDownloader 2.
-RUN \
-    mkdir -p /defaults && \
-    wget ${JDOWNLOADER_URL} -O /defaults/JDownloader.jar
-
-# Download and install Oracle JRE.
-# NOTE: This is needed only for the 7-Zip-JBinding workaround.
-RUN \
-    add-pkg --virtual build-dependencies curl && \
-    mkdir /opt/jre && \
-    curl -# -L ${JAVAJRE_URL} | tar -xz --strip 2 -C /opt/jre amazon-corretto-${JAVAJRE_VERSION}-linux-x64/jre && \
-    del-pkg build-dependencies
 
 # Install dependencies.
 RUN \
@@ -60,7 +57,21 @@ RUN \
         # For ffmpeg and ffprobe tools.
         ffmpeg \
         # For rtmpdump tool.
-        rtmpdump
+        rtmpdump \
+        wget
+
+# Download JDownloader 2.
+RUN \
+    mkdir -p /defaults && \
+    wget ${JDOWNLOADER_URL} -O /defaults/JDownloader.jar
+
+# Download and install Oracle JRE.
+# NOTE: This is needed only for the 7-Zip-JBinding workaround.
+RUN \
+    add-pkg --virtual build-dependencies curl && \
+    mkdir /opt/jre && \
+    curl -# -L ${JAVAJRE_URL} | tar -xz --strip 2 -C /opt/jre amazon-corretto-${JAVAJRE_VERSION}-linux-${ARCH}/jre && \
+    del-pkg build-dependencies
 
 # Maximize only the main/initial window.
 RUN \
