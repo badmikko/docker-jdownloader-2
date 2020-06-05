@@ -43,7 +43,7 @@ install_build_dependencies_alpine() {
 }
 
 install_build_dependencies_debian() {
-    add-pkg --virtual rfg-build-dependencies curl ca-certificates jq nodejs
+    apt-get install -y curl ca-certificates jq nodejs
 }
 
 install_build_dependencies() {
@@ -55,7 +55,7 @@ install_build_dependencies() {
 }
 
 uninstall_build_dependencies() {
-  del-pkg rfg-build-dependencies
+  #del-pkg rfg-build-dependencies
 }
 
 cleanup() {
