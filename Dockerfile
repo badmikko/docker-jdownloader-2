@@ -27,19 +27,6 @@ ARG DOCKER_IMAGE_VERSION=unknown
 # Define software versions.
 ARG JAVAJRE_VERSION=8.212.04.2
 
-# Determinate CPU Arch.
-# Define software download URLs.
-RUN \
-  dpkgArch="$(uname -m)" && \
-  case "${dpkgArch##*-}" in \
-    x86_64) ARCH='x64';; \
-    aarch64) ARCH='aarch64';; \
-    *) echo "unsupported architecture"; exit 1 ;; \
-  esac && \
-  echo “Running on ${ARCH}” && \
-  export JDOWNLOADER_URL="http://installer.jdownloader.org/JDownloader.jar" && \
-  export JAVAJRE_URL="https://d3pxv6yz143wms.cloudfront.net/${JAVAJRE_VERSION}/amazon-corretto-${JAVAJRE_VERSION}-linux-${ARCH}.tar.gz"
-
 # Define working directory.
 WORKDIR /tmp
 
@@ -60,11 +47,6 @@ RUN \
         rtmpdump \
         wget
 
-# Download JDownloader 2.
-RUN \
-    mkdir -p /defaults && \
-    wget ${JDOWNLOADER_URL} -O /defaults/JDownloader.jar
-
 # Download and install Oracle JRE.
 # NOTE: This is needed only for the 7-Zip-JBinding workaround.
 RUN \
@@ -72,10 +54,24 @@ RUN \
     apt-get install -y --no-install-recommends build-essential curl && \
     mkdir /opt/jre
 
+# Download JDownloader 2.
+# Determinate CPU Arch.
+# Define software download URLs.
 RUN \
-    echo "Downloading from" ${JAVAJRE_URL} && \
-    curl -# -L ${JAVAJRE_URL} | tar -xz --strip 2 -C /opt/jre amazon-corretto-${JAVAJRE_VERSION}-linux-${ARCH}/jre && \
-    apt-get remove -y build-essential
+  dpkgArch="$(uname -m)" && \
+  case "${dpkgArch##*-}" in \
+    x86_64) ARCH='x64';; \
+    aarch64) ARCH='aarch64';; \
+    *) echo "unsupported architecture"; exit 1 ;; \
+  esac && \
+  echo “Running on ${ARCH}” && \
+  export JDOWNLOADER_URL="http://installer.jdownloader.org/JDownloader.jar" && \
+  export JAVAJRE_URL="https://d3pxv6yz143wms.cloudfront.net/${JAVAJRE_VERSION}/amazon-corretto-${JAVAJRE_VERSION}-linux-${ARCH}.tar.gz" && \
+  mkdir -p /defaults && \
+  wget ${JDOWNLOADER_URL} -O /defaults/JDownloader.jar && \
+  echo "Downloading from" ${JAVAJRE_URL} && \
+  curl -# -L ${JAVAJRE_URL} | tar -xz --strip 2 -C /opt/jre amazon-corretto-${JAVAJRE_VERSION}-linux-${ARCH}/jre && \
+  apt-get remove -y build-essential
 
 # Maximize only the main/initial window.
 RUN \
