@@ -85,7 +85,7 @@ COPY rootfs/ /
 RUN \
     APP_ICON_URL=https://raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/images/jdownloader-2-icon.png && \
     chmod +x /usr/local/bin/install_app_icon.sh && \
-    install_app_icon.sh $APP_ICON_URL"
+    install_app_icon.sh "$APP_ICON_URL"
 
 # Set environment variables.
 ENV APP_NAME="JDownloader 2" \
