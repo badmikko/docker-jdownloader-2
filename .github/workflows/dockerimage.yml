@@ -36,4 +36,5 @@ jobs:
           --platform linux/amd64,linux/arm64 \
           --output "type=image,push=true" \
           -t ${{ secrets.DOCKER_USER }}/docker-jdownloader-2:latest \
+          -t ${{ secrets.DOCKER_USER }}/docker-jdownloader-2:$(date -u +'%Y%m%d') \
           .
