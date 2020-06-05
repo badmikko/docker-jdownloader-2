@@ -66,7 +66,7 @@ RUN \
   esac && \
   echo “Running on ${ARCH}” && \
   export JDOWNLOADER_URL="http://installer.jdownloader.org/JDownloader.jar" && \
-  export JAVAJRE_URL="https://corretto.aws/downloads/latest/amazon-corretto-${JAVAJRE_VERSION}-${ARCH}-linux-jdk.tar.gz
+  export JAVAJRE_URL="https://corretto.aws/downloads/latest/amazon-corretto-${JAVAJRE_VERSION}-${ARCH}-linux-jdk.tar.gz" && \
   mkdir -p /defaults && \
   wget ${JDOWNLOADER_URL} -O /defaults/JDownloader.jar && \
   echo "Downloading from" ${JAVAJRE_URL} && \
