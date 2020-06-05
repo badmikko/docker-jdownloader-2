@@ -46,6 +46,7 @@ WORKDIR /tmp
 
 # Install dependencies.
 RUN \
+    apt-get update && \
     apt-get install -y \
         # For the 7-Zip-JBinding workaround, Oracle JRE is needed instead of
         # the Alpine Linux's openjdk native package.
