@@ -83,7 +83,7 @@ curl -sS -L -o "$ICONSDIR/master_icon.png" "$APP_ICON_URL"
 
 # Create the description file.
 echo "$APP_ICON_DESC" > faviconDescription.json
-sed-patch "s/ICON_VERSION/$(date | md5sum | cut -c1-10)/" faviconDescription.json
+sed -i "s/ICON_VERSION/$(date | md5sum | cut -c1-10)/" faviconDescription.json
 
 echo "Installing Real Favicon Generator..."
 mkdir cli-real-favicon
@@ -96,7 +96,7 @@ echo "Generating favicons..." && \
 
 echo "Adjusting HTML page..."
 jq -r '.favicon.html_code' faviconData.json > htmlCode
-sed-patch -ne '/<!-- BEGIN Favicons -->/ {p; r htmlCode' -e ':a; n; /<!-- END Favicons -->/ {p; b}; ba}; p' /opt/novnc/index.vnc
+sed -i -ne '/<!-- BEGIN Favicons -->/ {p; r htmlCode' -e ':a; n; /<!-- END Favicons -->/ {p; b}; ba}; p' /opt/novnc/index.vnc
 
 env HOME=/tmp npm uninstall --cache /tmp/.npm cli-real-favicon
 
