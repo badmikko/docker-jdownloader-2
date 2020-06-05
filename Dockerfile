@@ -53,7 +53,7 @@ RUN \
         # The libstdc++ package is also needed as part of the 7-Zip-JBinding
         # workaround.
         #openjdk8-jre \
-        libstdc++-10-dev \
+        libstdc++-5-dev \
         ttf-dejavu \
         # For ffmpeg and ffprobe tools.
         ffmpeg \
