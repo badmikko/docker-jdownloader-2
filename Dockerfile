@@ -45,7 +45,7 @@ RUN \
         ffmpeg \
         # For rtmpdump tool.
         rtmpdump \
-        wget
+        wget \
         python
 
 # Download and install Oracle JRE.
