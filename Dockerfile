@@ -25,7 +25,7 @@ FROM lsiobase/gui:latest
 ARG DOCKER_IMAGE_VERSION=unknown
 
 # Define software versions.
-ARG JAVAJRE_VERSION=8.212.04.2
+ARG JAVAJRE_VERSION=8.252.09.1
 
 # Define working directory.
 WORKDIR /tmp
@@ -70,7 +70,7 @@ RUN \
   mkdir -p /defaults && \
   wget ${JDOWNLOADER_URL} -O /defaults/JDownloader.jar && \
   echo "Downloading from" ${JAVAJRE_URL} && \
-  curl -# -L ${JAVAJRE_URL} | tar -xz --strip 2 -C /opt/jre amazon-corretto-*-linux-${ARCH}/jre && \
+  curl -# -L ${JAVAJRE_URL} | tar -xz --strip 2 -C /opt/jre amazon-corretto-${JAVAJRE_VERSION}-linux-${ARCH}/jre && \
   apt-get remove -y build-essential
 
 # Maximize only the main/initial window.
