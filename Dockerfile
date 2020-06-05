@@ -47,7 +47,7 @@ RUN \
         rtmpdump \
         wget \
         python \
-        pip && \
+        python-pip && \
     pip install pyxdg
 
 # Download and install Oracle JRE.
