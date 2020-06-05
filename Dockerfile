@@ -75,7 +75,7 @@ RUN \
 
 # Maximize only the main/initial window.
 RUN \
-    sed-patch 's/<application type="normal">/<application type="normal" title="JDownloader 2">/' \
+    sed -i 's/<application type="normal">/<application type="normal" title="JDownloader 2">/' \
         /etc/xdg/openbox/rc.xml
 
 # Generate and install favicons.
