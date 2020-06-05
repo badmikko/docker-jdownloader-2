@@ -43,7 +43,7 @@ install_build_dependencies_alpine() {
 }
 
 install_build_dependencies_debian() {
-    apt-get install -y curl ca-certificates jq nodejs
+    apt-get install -y curl ca-certificates jq nodejs npm
 }
 
 install_build_dependencies() {
