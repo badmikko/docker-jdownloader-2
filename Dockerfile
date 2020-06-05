@@ -69,6 +69,7 @@ RUN \
 # Download and install Oracle JRE.
 # NOTE: This is needed only for the 7-Zip-JBinding workaround.
 RUN \
+    export DEBIAN_FRONTEND=noninteractive && \
     apt-get install -y --no-install-recommends build-essential curl && \
     mkdir /opt/jre
 
