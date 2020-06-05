@@ -56,6 +56,7 @@ install_build_dependencies() {
 
 uninstall_build_dependencies() {
   #del-pkg rfg-build-dependencies
+  echo ""
 }
 
 cleanup() {
