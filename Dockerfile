@@ -28,6 +28,7 @@ ARG DOCKER_IMAGE_VERSION=unknown
 ARG JAVAJRE_VERSION=8.212.04.2
 
 # Determinate CPU Arch.
+# Define software download URLs.
 RUN \
   dpkgArch="$(uname -m)" && \
   case "${dpkgArch##*-}" in \
@@ -35,11 +36,9 @@ RUN \
     aarch64) ARCH='aarch64';; \
     *) echo "unsupported architecture"; exit 1 ;; \
   esac && \
-  echo “Running on ${ARCH}”
-
-# Define software download URLs.
-ARG JDOWNLOADER_URL=http://installer.jdownloader.org/JDownloader.jar
-ARG JAVAJRE_URL=https://d3pxv6yz143wms.cloudfront.net/${JAVAJRE_VERSION}/amazon-corretto-${JAVAJRE_VERSION}-linux-${ARCH}.tar.gz
+  echo “Running on ${ARCH}” && \
+  JDOWNLOADER_URL=http://installer.jdownloader.org/JDownloader.jar && \
+  JAVAJRE_URL=https://d3pxv6yz143wms.cloudfront.net/${JAVAJRE_VERSION}/amazon-corretto-${JAVAJRE_VERSION}-linux-${ARCH}.tar.gz
 
 # Define working directory.
 WORKDIR /tmp
