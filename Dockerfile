@@ -73,7 +73,7 @@ RUN \
   cd /defaults && \
   wget ${JAVAJRE_URL} -O /defaults/amazon-corretto.tar.gz && \
   tar -xzf /defaults/amazon-corretto.tar.gz && \
-  cp amazon-corretto-*/jre /opt/jre && \
+  cp -r /defaults/amazon-corretto-*/jre /opt/jre && \
   apt-get remove -y build-essential
 
 # Maximize only the main/initial window.
