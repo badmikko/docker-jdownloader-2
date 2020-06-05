@@ -25,7 +25,7 @@ FROM lsiobase/gui:latest
 ARG DOCKER_IMAGE_VERSION=unknown
 
 # Define software versions.
-ARG JAVAJRE_VERSION=8.212.04.2
+ARG JAVAJRE_VERSION=8
 
 # Define working directory.
 WORKDIR /tmp
@@ -67,6 +67,7 @@ RUN \
   echo “Running on ${ARCH}” && \
   export JDOWNLOADER_URL="http://installer.jdownloader.org/JDownloader.jar" && \
   export JAVAJRE_URL="https://d3pxv6yz143wms.cloudfront.net/${JAVAJRE_VERSION}/amazon-corretto-${JAVAJRE_VERSION}-linux-${ARCH}.tar.gz" && \
+  export JAVAJRE_URL="https://corretto.aws/downloads/latest/amazon-corretto-${JAVAJRE_VERSION}-${ARCH}-linux-jdk.tar.gz" && \
   mkdir -p /defaults && \
   wget ${JDOWNLOADER_URL} -O /defaults/JDownloader.jar && \
   echo "Downloading from" ${JAVAJRE_URL} && \
