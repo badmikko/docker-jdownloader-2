@@ -70,7 +70,10 @@ RUN \
   mkdir -p /defaults && \
   wget ${JDOWNLOADER_URL} -O /defaults/JDownloader.jar && \
   echo "Downloading from" ${JAVAJRE_URL} && \
-  curl -# -L ${JAVAJRE_URL} | tar -xz --strip 2 -C /opt/jre amazon-corretto-*-linux-${ARCH}/jre && \
+  cd /defaults && \
+  wget ${JAVAJRE_URL} -O /defaults/amazon-corretto.tar.gz && \
+  tar -xzf /defaults/amazon-corretto.tar.gz && \
+  cp amazon-corretto-*/jre /opt/jre
   apt-get remove -y build-essential
 
 # Maximize only the main/initial window.
