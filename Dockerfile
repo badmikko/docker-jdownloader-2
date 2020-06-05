@@ -73,7 +73,7 @@ RUN \
     mkdir /opt/jre
 
 RUN \
-    echo "Downloading from" ${JAVAJRE_URL}
+    echo "Downloading from" ${JAVAJRE_URL} && \
     curl -# -L ${JAVAJRE_URL} | tar -xz --strip 2 -C /opt/jre amazon-corretto-${JAVAJRE_VERSION}-linux-${ARCH}/jre && \
     apt-get remove -y build-essential
 
