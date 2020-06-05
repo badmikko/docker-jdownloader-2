@@ -35,7 +35,7 @@ RUN \
     aarch64) ARCH='aarch64';; \
     *) echo "unsupported architecture"; exit 1 ;; \
   esac && \
-  echo “Running on ${ARCH}” && \
+  echo “Running on ${ARCH}”
 
 # Define software download URLs.
 ARG JDOWNLOADER_URL=http://installer.jdownloader.org/JDownloader.jar
