@@ -46,6 +46,7 @@ RUN \
         # For rtmpdump tool.
         rtmpdump \
         wget
+        python
 
 # Download and install Oracle JRE.
 # NOTE: This is needed only for the 7-Zip-JBinding workaround.
