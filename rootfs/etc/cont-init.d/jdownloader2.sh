@@ -44,6 +44,15 @@ log() {
     fi
 }
 
+if [ ! "$(id -u abc)" -eq "$USER_ID" ]; then
+  usermod -o -u "$USER_ID" abc;
+fi
+
+if [ ! "$(id -g abc)" -eq "$GROUP_ID" ]; then
+  groupmod -o -g "$GROUP_ID" abc;
+fi
+
+
 # Install requested packages.
 if [ "${INSTALL_EXTRA_PKGS:-UNSET}" != "UNSET" ]; then
     log "installing requested package(s)..."
