@@ -22,6 +22,8 @@
 FROM lsiobase/gui:latest
 
 # Docker image version is provided via build arg.
+ENV TERM="xterm" APPNAME="jdownloader2"
+ARG DEBIAN_FRONTEND=noninteractive
 ARG DOCKER_IMAGE_VERSION=unknown
 
 # Define software versions.
@@ -76,7 +78,7 @@ RUN \
   cd /defaults && \
   wget ${JAVAJRE_URL} -O /defaults/amazon-corretto.tar.gz && \
   tar -xzf /defaults/amazon-corretto.tar.gz && \
-  cp -r /defaults/amazon-corretto-*/jre /opt/jre && \
+  cp -r /defaults/amazon-corretto-*/jre /opt && \
   apt-get remove -y build-essential
 
 # Maximize only the main/initial window.
