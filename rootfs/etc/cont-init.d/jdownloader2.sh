@@ -54,6 +54,7 @@ fi
 
 
 # Install requested packages.
+echo "Install requested packages."
 if [ "${INSTALL_EXTRA_PKGS:-UNSET}" != "UNSET" ]; then
     log "installing requested package(s)..."
     for PKG in $INSTALL_EXTRA_PKGS; do
@@ -67,6 +68,7 @@ if [ "${INSTALL_EXTRA_PKGS:-UNSET}" != "UNSET" ]; then
 fi
 
 # Make sure mandatory directories exist.
+echo "Make sure mandatory directories exist."
 mkdir -p /config/logs
 
 if [ ! -f /config/JDownloader.jar ]; then
@@ -75,6 +77,7 @@ if [ ! -f /config/JDownloader.jar ]; then
 fi
 
 # Take ownership of the config directory content.
+echo "Take ownership of the config directory content."
 find /config -mindepth 1 -exec chown $USER_ID:$GROUP_ID {} \;
 
 ## Take ownership of the output directory.
@@ -88,4 +91,5 @@ find /config -mindepth 1 -exec chown $USER_ID:$GROUP_ID {} \;
 #    fi
 #fi
 
+echo "End of jdownloader2.sh"
 # vim: set ft=sh :
