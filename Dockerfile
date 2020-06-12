@@ -106,11 +106,3 @@ VOLUME ["/output"]
 # Expose ports.
 #   - 3129: For MyJDownloader in Direct Connection mode.
 EXPOSE 3129
-
-# Metadata.
-LABEL \
-      org.label-schema.name="jdownloader-2" \
-      org.label-schema.description="Docker container for JDownloader 2" \
-      org.label-schema.version="$DOCKER_IMAGE_VERSION" \
-      org.label-schema.vcs-url="https://github.com/jlesage/docker-jdownloader-2" \
-      org.label-schema.schema-version="1.0"
